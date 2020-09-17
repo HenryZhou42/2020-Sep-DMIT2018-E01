@@ -46,14 +46,16 @@ namespace ChinookSystem.Entities
         public int ArtistId { get; set; }
 
         [Required(ErrorMessage ="Name is required")]
-        public string ISBN { get; set; }
-
         public string Name
         {
             get { return _Name; }
             set { _Name = string.IsNullOrEmpty(value) ? null : value; }
 
         }
+
+        public virtual ICollection<Album> Albums { get; set; }
+        
+
         //constructors
 
         //behaviours
