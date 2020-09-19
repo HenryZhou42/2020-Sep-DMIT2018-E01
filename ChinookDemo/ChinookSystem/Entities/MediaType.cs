@@ -20,7 +20,7 @@ namespace ChinookSystem.Entities
         public int MediaTypeId { get; set; }
 
         
-        [StringLength(120, ErrorMessage = "MediaTyoe Name is limited to 200 characters")]
+        [StringLength(120, ErrorMessage = "MediaType Name is limited to 200 characters")]
         public string Name { get; set; }
 
         public virtual ICollection<Track> Tracks { get; set; }

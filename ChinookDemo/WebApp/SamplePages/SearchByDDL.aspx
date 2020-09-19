@@ -4,9 +4,12 @@
     <div class ="row">
         <asp:Label ID="Label1" runat="server" Text="Select an artist"></asp:Label>
         <asp:DropDownList ID="ArtistList" runat="server"></asp:DropDownList>
-        <asp:LinkButton ID="SearchAlbum" runat="server">Search for albums</asp:LinkButton>
+        <asp:LinkButton ID="SearchAlbum" runat="server" OnClick="SearchAlbum_Click">Search for albums</asp:LinkButton>
     </div>
     <div class ="row">
         <asp:Label ID="MessageLabel" runat="server"></asp:Label>
     </div>
+    <asp:GridView ID="AlbumArtistList" runat="server"></asp:GridView>
 </asp:Content>
+
+
