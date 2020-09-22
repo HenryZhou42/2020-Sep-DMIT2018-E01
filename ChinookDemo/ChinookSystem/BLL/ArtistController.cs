@@ -4,17 +4,22 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ChinookSystem.DAL;
+
 
 #region Additional Namespaces
 using ChinookSystem.Entities;
 using ChinookSystem.ViewModels;
+using System.ComponentModel;
+using ChinookSystem.DAL;
 #endregion
 
 namespace ChinookSystem.BLL
 {
+    //expose library class for config of ODS
+    [DataObject]
     public class ArtistController
     {
+        [DataObjectMethod(DataObjectMethodType.Select,false)]
         public List<SelectionList> Artists_List()
         {
 
