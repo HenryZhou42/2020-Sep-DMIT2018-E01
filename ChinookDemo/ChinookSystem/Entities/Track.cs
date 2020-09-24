@@ -1,28 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-#region Additional Namespaces
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Runtime.InteropServices;
-#endregion
-
-
 namespace ChinookSystem.Entities
 {
-    [Table("Tracks")]
-    internal class Track
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.ComponentModel.DataAnnotations.Schema;
+    using System.Data.Entity.Spatial;
+
+    internal partial class Track
     {
         private string _Composer;
-        [Key]
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Track()
+        {
+            InvoiceLines = new HashSet<InvoiceLine>();
+            PlaylistTracks = new HashSet<PlaylistTrack>();
+        }
 
         public int TrackId { get; set; }
 
-        [Required(ErrorMessage ="Track Name is required")]
-        [StringLength(200,ErrorMessage ="Track Name is limited to 200 characters")]
+        [Required(ErrorMessage = "Track Name is required")]
+        [StringLength(200, ErrorMessage = "Track Name is limited to 200 characters")]
         public string Name { get; set; }
 
         public int? AlbumId { get; set; }
@@ -38,25 +36,23 @@ namespace ChinookSystem.Entities
             set { _Composer = string.IsNullOrEmpty(value) ? null : value; }
         }
 
-        public int Millisecond { get; set; }
+        public int Milliseconds { get; set; }
 
         public int? Bytes { get; set; }
 
+        [Column(TypeName = "numeric")]
         public decimal UnitPrice { get; set; }
 
-        //navigational properties
-        // virtually map the relationship of table A to table B
-        // use to overlay a model of the database ERD relationships
-        //tracks has a relationship to albums mediatype genres, invoicelines, PlaylistTracks
-        //A track has one parent(Album)
-        //An album has zero, one or more children(Tracks)
-        //an entity may has both virtual properties for parent relationships and children relationships
-        //Track and MediaTypes (child to parent)
-        //Track and Genres(child to parent)
-        //Track and InvoiceLines(Parent to child)
-        //Track and playlistTrack(parent to children)
-
         public virtual Album Album { get; set; }
-        public virtual MediaType MediaTypes { get; set; }
+
+        public virtual Genre Genre { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<InvoiceLine> InvoiceLines { get; set; }
+
+        public virtual MediaType MediaType { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<PlaylistTrack> PlaylistTracks { get; set; }
     }
 }

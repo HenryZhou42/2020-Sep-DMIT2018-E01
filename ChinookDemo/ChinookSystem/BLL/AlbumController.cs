@@ -1,10 +1,6 @@
-﻿using ChinookSystem.DAL;
-using ChinookSystem.ViewModels;
-using System;
+﻿using ChinookSystem.ViewModels;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.ComponentModel;
 using ChinookSystem.Entities;
 
